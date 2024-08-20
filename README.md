@@ -16,7 +16,7 @@
 <h2>Struktur Direktori</h2>
 <pre>
 /path/to/your/project/
-    ├── config.php          # File konfigurasi database dan API
+    ├── koneksi.php          # File konfigurasi database dan API
     ├── index.php           # Halaman utama untuk mencatat penghutang baru
     ├── save_debtor.php     # Proses penyimpanan data penghutang baru
     ├── data.php            # Halaman untuk melihat dan mengelola penghutang
@@ -29,7 +29,7 @@
 <h2>Instalasi</h2>
 <ol>
     <li><strong>Clone Repository</strong>
-        <pre><code>git clone https://github.com/username/repo-name.git
+        <pre><code>git clone https://github.com/rafiedotid/penghutang
 cd repo-name</code></pre>
     </li>
     <li><strong>Konfigurasi Database dan API</strong>
