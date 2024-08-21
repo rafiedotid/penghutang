@@ -1,89 +1,37 @@
+<h1>PENGHOETANK</h1>
 
-<body>
-
-<h1>Aplikasi Catatan Hutang</h1>
-
-<p>Proyek ini adalah aplikasi catatan hutang sederhana yang dibangun dengan PHP Native. Aplikasi ini memungkinkan pengguna untuk mencatat hutang, mengelola status pembayaran, dan mengirimkan pengingat otomatis kepada penghutang melalui API WhatsApp Gateway.</p>
+<p><strong>PENGHOETANK</strong> adalah aplikasi manajemen penghutang berbasis web yang memungkinkan pengguna untuk mencatat dan mengelola hutang, mengirim pengingat melalui WhatsApp, serta menandai hutang sebagai lunas. Aplikasi ini dirancang dengan antarmuka yang responsif dan mendukung penggunaan di berbagai perangkat.</p>
 
 <h2>Fitur Utama</h2>
 <ul>
-    <li><strong>Catat Penghutang Baru</strong>: Formulir untuk menambahkan penghutang baru ke dalam database.</li>
-    <li><strong>Kelola Hutang</strong>: Menampilkan daftar penghutang, termasuk nama, nomor HP, jumlah hutang, tanggal jatuh tempo, dan status pembayaran.</li>
-    <li><strong>Tandai Hutang Lunas</strong>: Mengubah status hutang menjadi lunas, sekaligus mengirimkan pesan terima kasih melalui WhatsApp.</li>
-    <li><strong>Pengingat Otomatis</strong>: Mengirimkan pengingat otomatis kepada penghutang yang belum melunasi hutangnya pada tanggal jatuh tempo menggunakan cron job.</li>
+    <li>Mengelola daftar penghutang dengan informasi nama, nomor HP, jumlah hutang, dan tanggal jatuh tempo.</li>
+    <li>Mengirim pengingat otomatis melalui API WhatsApp.</li>
+    <li>Fitur pencarian dan filter berdasarkan status hutang (lunas/belum lunas).</li>
+    <li>Mengedit tanggal jatuh tempo dan jumlah hutang langsung dari tabel data.</li>
+    <li>Responsive design yang cocok untuk tampilan desktop dan mobile.</li>
 </ul>
 
-<h2>Struktur Direktori</h2>
-<pre>
-/path/to/your/project/
-    ├── koneksi.php          # File konfigurasi database dan API
-    ├── index.php           # Halaman utama untuk mencatat penghutang baru
-    ├── save_debtor.php     # Proses penyimpanan data penghutang baru
-    ├── data.php            # Halaman untuk melihat dan mengelola penghutang
-    ├── update_status.php   # Proses update status hutang
-    ├── send_reminder.php   # Script untuk mengirim pengingat otomatis
-    ├── cronjob.sh          # Script cron job (opsional)
-    └── README.md           # File ini
-</pre>
-
 <h2>Instalasi</h2>
+<p>Untuk menginstal aplikasi ini, ikuti langkah-langkah berikut:</p>
 <ol>
-    <li><strong>Clone Repository</strong>
-        <pre><code>git clone https://github.com/rafiedotid/penghutang
-cd repo-name</code></pre>
-    </li>
-    <li><strong>Konfigurasi Database dan API</strong>
-        Edit file <code>config.php</code> dan masukkan detail database serta token API WhatsApp Gateway Anda:
-        <pre><code>&lt;?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "nama_database";
-
-$apiToken = "YOUR_FONNTE_API_TOKEN"; // Masukkan token API Fonnte Anda
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-?&gt;</code></pre>
-    </li>
-    <li><strong>Setup Database</strong>
-        Buat database baru dan jalankan skrip SQL berikut untuk membuat tabel:
-        <pre><code>CREATE DATABASE nama_database;
-
-USE nama_database;
-
-CREATE TABLE debtors (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    amount DECIMAL(15, 2) NOT NULL,
-    due_date DATE NOT NULL,
-    status ENUM('belum_lunas', 'lunas') DEFAULT 'belum_lunas'
-);</code></pre>
-    </li>
-    <li><strong>Menjalankan Aplikasi</strong>
-        Aplikasi ini bisa dijalankan di localhost menggunakan server PHP built-in atau server web lainnya seperti Apache.
-        <pre><code>php -S localhost:8000</code></pre>
-        Buka browser dan akses aplikasi melalui <code>http://localhost:8000</code>.
-    </li>
-    <li><strong>Mengatur Cron Job (Opsional)</strong>
-        Jika Anda ingin mengirim pengingat otomatis setiap hari, tambahkan script berikut ke crontab Anda:
-        <pre><code>0 8 * * * /path/to/your/project/cronjob.sh</code></pre>
-        Ini akan menjalankan <code>send_reminder.php</code> setiap hari pukul 8 pagi.
-    </li>
+    <li>Clone repository ini.</li>
+    <li>Koneksikan aplikasi ke database MySQL dengan mengedit file <code>koneksi.php</code>.</li>
+    <li>Import database dengan skema yang telah disediakan.</li>
+    <li>Sesuaikan konfigurasi API WhatsApp jika diperlukan.</li>
+    <li>Akses aplikasi melalui browser dengan membuka <code>index.php</code>.</li>
 </ol>
 
-<h2>Kontribusi</h2>
-<p>Jika Anda ingin berkontribusi pada proyek ini, silakan fork repository ini dan buat pull request dengan perubahan Anda.</p>
+<h2>Struktur Proyek</h2>
+<ul>
+    <li><code>/lib</code> - Berisi file header dan navbar.</li>
+    <li><code>/proses</code> - Berisi skrip untuk memproses update data seperti tanggal jatuh tempo dan jumlah hutang.</li>
+    <li><code>koneksi.php</code> - File konfigurasi untuk koneksi database.</li>
+    <li><code>index.php</code> - Halaman utama untuk menambahkan penghutang baru.</li>
+    <li><code>data.php</code> - Halaman untuk melihat daftar penghutang dan mengelola status hutang.</li>
+</ul>
 
 <h2>Lisensi</h2>
-<p>Proyek ini dilisensikan di bawah MIT License.</p>
+<p>Aplikasi ini bersifat open-source dan dilisensikan di bawah lisensi MIT.</p>
 
 </body>
 </html>
-
