@@ -28,6 +28,7 @@
     <li><code>koneksi.php</code> - File konfigurasi untuk koneksi database.</li>
     <li><code>index.php</code> - Halaman utama untuk menambahkan penghutang baru.</li>
     <li><code>data.php</code> - Halaman untuk melihat daftar penghutang dan mengelola status hutang.</li>
+    <li><code>send_reminder.php</code> - Cronjob untuk mengirim pengingat hutang dengan status belum lunas.</li>
 </ul>
 
 <h2>Lisensi</h2>
