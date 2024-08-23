@@ -3,29 +3,17 @@ include 'koneksi.php'; // Menghubungkan ke database
 include 'lib/header.php'; // Menghubungkan file header
 include 'lib/navbar.php'; // Menghubungkan file navbar
 
-// Jika formulir disubmit, proses data
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $amount = $_POST['amount'];
-    $due_date = $_POST['due_date'];
+session_start(); // Memulai session jika belum
 
-    // Menyimpan data ke database
-    $sql = "INSERT INTO debtors (name, phone, amount, due_date, status) VALUES (?, ?, ?, ?, 'belum_lunas')";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssis", $name, $phone, $amount, $due_date);
+// Cek apakah ada pesan sukses atau error dari session
+if (isset($_SESSION['success_message'])) {
+    $success_message = $_SESSION['success_message'];
+    unset($_SESSION['success_message']); // Hapus setelah ditampilkan
+}
 
-    if ($stmt->execute()) {
-        $success_message = "Data berhasil disimpan!";
-        // Setelah menyimpan data, reset form
-        $_POST = array();
-    } else {
-        $error_message = "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $conn->close();
+if (isset($_SESSION['error_message'])) {
+    $error_message = $_SESSION['error_message'];
+    unset($_SESSION['error_message']); // Hapus setelah ditampilkan
 }
 ?>
 
@@ -47,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php echo $error_message; ?>
                             </div>
                         <?php endif; ?>
-                        <form id="debtForm" action="index.php" method="POST">
+                        <form id="debtForm" action="proses/save.php" method="POST">
                             <div class="form-group">
                                 <label for="name">Nama</label>
                                 <input type="text" class="form-control" id="name" name="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>" required>
