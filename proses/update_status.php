@@ -85,6 +85,6 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 
-header('Location: data.php'); // Kembali ke halaman data.php setelah proses selesai
+header('Location: ../data.php'); // Kembali ke halaman data.php setelah proses selesai
 exit();
 ?>
